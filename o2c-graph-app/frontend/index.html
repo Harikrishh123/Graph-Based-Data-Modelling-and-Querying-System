@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Context - Order-to-Cash Graph Explorer</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Graph library -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Graph Area -->
+    <div id="graph-container"></div>
+    
+    <!-- Title and Toolbar (Top Right) -->
+    <div class="header-toolbar">
+        <h1>Nexus Context <span>O2C</span></h1>
+        <div class="graph-stats" id="graph-stats">Nodes: 0 | Edges: 0</div>
+        <button id="clear-graph-btn" class="glass-btn">Clear Map</button>
+    </div>
+
+    <!-- Floating Chat Interface -->
+    <div class="chat-panel glass-panel">
+        <div class="chat-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <h2>AI Assistant</h2>
+            <div class="pulse-indicator"></div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message system-msg">
+                <div class="avatar system-avatar">AI</div>
+                <div class="msg-bubble">
+                    Welcome to the Context Graph System. How can I assist you with analyzing the SAP Order-to-Cash flow?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <form id="chat-form">
+                <input type="text" id="user-input" placeholder="e.g. Which products are associated with the highest billing docs?" autocomplete="off" required>
+                <button type="submit" id="send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- API Key Modal if env is not set or to allow overriding -->
+    <div id="setup-modal" class="modal glass-panel hidden">
+        <div class="modal-content">
+            <h3>Configuration Required</h3>
+            <p>Please enter your Gemini API key. This will be sent as a header to the local backend.</p>
+            <input type="password" id="api-key-input" placeholder="AIzaSy...">
+            <button id="save-key-btn" class="glass-btn primary">Save & Start</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
