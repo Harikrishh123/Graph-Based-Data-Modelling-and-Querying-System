@@ -337,7 +337,7 @@ form.addEventListener('submit', async (e) => {
     showLoading();
     
     try {
-        const response = await fetch('http://localhost:8000/api/chat', {
+        const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -367,7 +367,7 @@ form.addEventListener('submit', async (e) => {
 
 async function initGraph() {
     try {
-        const response = await fetch('http://localhost:8000/api/graph/init', {
+        const response = await fetch('/api/graph/init', {
             headers: {
                 'Authorization': apiKey ? `Bearer ${apiKey}` : ''
             }

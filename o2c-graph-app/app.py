@@ -1,8 +1,9 @@
 import os
 import sqlite3
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from google import genai
 from google.genai import types
@@ -325,6 +326,9 @@ async def chat_endpoint(req: QueryRequest, req_obj: Request):
     except Exception as e:
         print("API Error:", str(e))
         return {"role": "model", "content": "I encountered an error processing your query. Please format or try again.", "graph": {"nodes": [], "edges": []}}
+
+# Mount frontend last so it doesn't intercept /api requests
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn
